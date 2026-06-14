@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Illegal Attack Compensation Calculator</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #101520;
+  color: #f8fafc;
+}
+
+main {
+  max-width: 1100px;
+  margin: auto;
+  padding: 16px;
+}
+
+h1 {
+  margin-bottom: 6px;
+  font-size: 26px;
+}
+
+p {
+  color: #cbd5e1;
+}
+
+.section {
+  background: #182235;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 14px;
+}
+
+h2 {
+  color: #facc15;
+  margin-top: 0;
+  font-size: 19px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  background: #202c42;
+}
+
+th, td {
+  border: 1px solid #334155;
+  padding: 7px;
+  text-align: center;
+}
+
+th {
+  background: #0f172a;
+}
+
+td:first-child, th:first-child {
+  text-align: left;
+  font-weight: bold;
+}
+
+input {
+  width: 80px;
+  padding: 7px;
+  border-radius: 6px;
+  border: 1px solid #d6b932;
+  background: #fff4b8;
+  color: #111827;
+  text-align: center;
+  font-size: 16px;
+}
+
+.money {
+  white-space: nowrap;
+}
+
+.total-box {
+  display: flex;
+  justify-content: space-between;
+  background: #202c42;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.grand {
+  color: #86efac;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+button {
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-right: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.clear {
+  background: #fb7185;
+  color: #111827;
+}
+
+.print {
+  background: #facc15;
+  color: #111827;
+}
+
+@media print {
+  button {
+    display: none;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+}
+</style>
+</head>
+
+<body>
+<main>
+<h1>Illegal Attack Compensation Calculator</h1>
+<p>Enter losses in the yellow boxes. The calculator adds base silver, 20% caravan tax, and total amount due.</p>
+
+<div class="section">
+<h2>Troops</h2>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Troop Type</th>
+<th>Level 1</th>
+<th>Level 2</th>
+<th>Level 3</th>
+<th>Level 4</th>
+<th>Level 5</th>
+<th>Level 6</th>
+<th>Base Silver</th>
+<th>20% Tax</th>
+<th>Total Due</th>
+</tr>
+</thead>
+<tbody id="troops"></tbody>
+</table>
+</div>
+</div>
+
+<div class="section">
+<h2>Catapults</h2>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Catapult Level</th>
+<th>Quantity Lost</th>
+<th>Rate</th>
+<th>Base Silver</th>
+<th>20% Tax</th>
+<th>Total Due</th>
+</tr>
+</thead>
+<tbody id="catapults"></tbody>
+</table>
+</div>
+</div>
+
+<div class="section">
+<h2>Monsters</h2>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Monster Level</th>
+<th>Quantity Lost</th>
+<th>Rate</th>
+<th>Base Silver</th>
+<th>20% Tax</th>
+<th>Total Due</th>
+</tr>
+</thead>
+<tbody id="monsters"></tbody>
+</table>
+</div>
+</div>
+
+<div class="section">
+<h2>Battle Griffins</h2>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Griffin Level</th>
+<th>Quantity Lost</th>
+<th>Rate Formula</th>
+<th>Base Silver</th>
+<th>20% Tax</th>
+<th>Total Due</th>
+</tr>
+</thead>
+<tbody id="griffins"></tbody>
+</table>
+</div>
+</div>
+
+<div class="section">
+<h2>Other Losses / Violations</h2>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Quantity / Amount</th>
+<th>Rate</th>
+<th>Base Silver</th>
+<th>20% Tax</th>
+<th>Total Due</th>
+</tr>
+</thead>
+<tbody id="other"></tbody>
+</table>
+</div>
+</div>
+
+<div class="section">
+<h2>Claim Total</h2>
+
+<div class="total-box">
+<span>Base Compensation Total</span>
+<strong id="baseTotal">0</strong>
+</div>
+
+<div class="total-box">
+<span>20% Caravan Tax</span>
+<strong id="taxTotal">0</strong>
+</div>
+
+<div class="total-box grand">
+<span>Total Amount Due</span>
+<strong id="grandTotal">0</strong>
+</div>
+
+<button class="clear" onclick="clearInputs()">Clear Calculator</button>
+<button class="print" onclick="window.print()">Print / Save PDF</button>
+</div>
+</main>
+
+<script>
+const taxRate = 0.20;
+
+const troopTypes = [
+  "Ranged",
+  "Melee",
+  "Mounted",
+  "Specialists",
+  "Mercenaries"
+];
+
+const catapultRates = {
+  1: 1500,
+  2: 1500,
+  3: 1500,
+  4: 3000,
+  5: 3000,
+  6: 3000,
+  7: 4500,
+  8: 4500,
+  9: 4500
+};
+
+const monsterRates = {
+  3: 10000,
+  4: 10000,
+  5: 10000,
+  6: 30000,
+  7: 30000,
+  8: 30000,
+  9: 30000
+};
+
+const otherItems = [
+  ["Hero", 2000],
+  ["Captain", 2000],
+  ["Tar", 500],
+  ["Gold Coin", 1000],
+  ["Illegal Scouting", 500000],
+  ["Portal", 2000000],
+  ["Fort", 5000000],
+  ["Resource Mine", 2000000],
+  ["RSS Taken", 1]
+];
+
+function number(value) {
+  const parsed = parseFloat(value);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function format(value) {
+  return Math.round(value).toLocaleString("en-US");
+}
+
+function inputBox() {
+  return '<input type="number" min="0" oninput="calculate()">';
+}
+
+function updateRow(row, base) {
+  const tax = base * taxRate;
+  const total = base + tax;
+
+  row.querySelector(".base").dataset.value = base;
+  row.querySelector(".tax").dataset.value = tax;
+  row.querySelector(".total").dataset.value = total;
+
+  row.querySelector(".base").textContent = format(base);
+  row.querySelector(".tax").textContent = format(tax);
+  row.querySelector(".total").textContent = format(total);
+}
+
+function buildTroops() {
+  document.getElementById("troops").innerHTML = troopTypes.map(type => `
+    <tr data-section="troop">
+      <td>${type}</td>
+      <td>${inputBox()}</td>
+      <td>${inputBox()}</td>
+      <td>${inputBox()}</td>
+      <td>${inputBox()}</td>
+      <td>${inputBox()}</td>
+      <td>${inputBox()}</td>
+      <td class="money base" data-value="0">0</td>
+      <td class="money tax" data-value="0">0</td>
+      <td class="money total" data-value="0">0</td>
+    </tr>
+  `).join("");
+}
+
+function buildCatapults() {
+  document.getElementById("catapults").innerHTML = Object.keys(catapultRates).map(level => `
+    <tr data-section="catapult" data-level="${level}">
+      <td>Level ${level}</td>
+      <td>${inputBox()}</td>
+      <td>${format(catapultRates[level])}</td>
+      <td class="money base" data-value="0">0</td>
+      <td class="money tax" data-value="0">0</td>
+      <td class="money total" data-value="0">0</td>
+    </tr>
+  `).join("");
+}
+
+function buildMonsters() {
+  document.getElementById("monsters").innerHTML = Object.keys(monsterRates).map(level => `
+    <tr data-section="monster" data-level="${level}">
+      <td>Level ${level}</td>
+      <td>${inputBox()}</td>
+      <td>${format(monsterRates[level])}</td>
+      <td class="money base" data-value="0">0</td>
+      <td class="money tax" data-value="0">0</td>
+      <td class="money total" data-value="0">0</td>
+    </tr>
+  `).join("");
+}
+
+function buildGriffins() {
+  document.getElementById("griffins").innerHTML = [1,2,3,4,5,6,7,8,9].map(level => `
+    <tr data-section="griffin" data-level="${level}">
+      <td>Level ${level}</td>
+      <td>${inputBox()}</td>
+      <td>${level} × 2,000</td>
+      <td class="money base" data-value="0">0</td>
+      <td class="money tax" data-value="0">0</td>
+      <td class="money total" data-value="0">0</td>
+    </tr>
+  `).join("");
+}
+
+function buildOther() {
+  document.getElementById("other").innerHTML = otherItems.map(item => `
+    <tr data-section="other" data-rate="${item[1]}">
+      <td>${item[0]}</td>
+      <td>${inputBox()}</td>
+      <td>${format(item[1])}</td>
+      <td class="money base" data-value="0">0</td>
+      <td class="money tax" data-value="0">0</td>
+      <td class="money total" data-value="0">0</td>
+    </tr>
+  `).join("");
+}
+
+function calculate() {
+  document.querySelectorAll('[data-section="troop"]').forEach(row => {
+    const inputs = row.querySelectorAll("input");
+    let base = 0;
+
+    inputs.forEach((input, index) => {
+      const level = index + 1;
+      const rate = level <= 3 ? 300 : 600;
+      base += number(input.value) * rate;
+    });
+
+    updateRow(row, base);
+  });
+
+  document.querySelectorAll('[data-section="catapult"]').forEach(row => {
+    const level = row.dataset.level;
+    const qty = number(row.querySelector("input").value);
+    updateRow(row, qty * catapultRates[level]);
+  });
+
+  document.querySelectorAll('[data-section="monster"]').forEach(row => {
+    const level = row.dataset.level;
+    const qty = number(row.querySelector("input").value);
+    updateRow(row, qty * monsterRates[level]);
+  });
+
+  document.querySelectorAll('[data-section="griffin"]').forEach(row => {
+    const level = number(row.dataset.level);
+    const qty = number(row.querySelector("input").value);
+    updateRow(row, qty * level * 2000);
+  });
+
+  document.querySelectorAll('[data-section="other"]').forEach(row => {
+    const qty = number(row.querySelector("input").value);
+    const rate = number(row.dataset.rate);
+    updateRow(row, qty * rate);
+  });
+
+  let baseTotal = 0;
+  let taxTotal = 0;
+  let grandTotal = 0;
+
+  document.querySelectorAll(".base").forEach(cell => {
+    baseTotal += number(cell.dataset.value);
+  });
+
+  document.querySelectorAll(".tax").forEach(cell => {
+    taxTotal += number(cell.dataset.value);
+  });
+
+  document.querySelectorAll(".total").forEach(cell => {
+    grandTotal += number(cell.dataset.value);
+  });
+
+  document.getElementById("baseTotal").textContent = format(baseTotal);
+  document.getElementById("taxTotal").textContent = format(taxTotal);
+  document.getElementById("grandTotal").textContent = format(grandTotal);
+}
+
+function clearInputs() {
+  document.querySelectorAll("input").forEach(input => {
+    input.value = "";
+  });
+
+  calculate();
+}
+
+buildTroops();
+buildCatapults();
+buildMonsters();
+buildGriffins();
+buildOther();
+calculate();
+</script>
+</body>
+</html>
