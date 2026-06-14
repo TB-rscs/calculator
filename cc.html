@@ -10,43 +10,57 @@
   ::-webkit-scrollbar-track { background: #0f172a; }
   ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
   ::-webkit-scrollbar-thumb:hover { background: #475569; }
-  body { background-color: #0b1120; font-family: 'Inter', sans-serif; }
-  @media screen { .print-only { display: none !important; } }
+
+  body {
+    background-color: #0b1120;
+    font-family: 'Inter', sans-serif;
+  }
+
+  @media screen {
+    .print-only { display: none !important; }
+  }
+
   @media print {
     .screen-only { display: none !important; }
     .print-only { display: block !important; }
-    body { background-color: white !important; color: black !important; }
+
+    body {
+      background-color: white !important;
+      color: black !important;
+    }
   }
 </style>
 </head>
+
 <body class="text-slate-200 antialiased selection:bg-yellow-500 selection:text-slate-900">
 
-<main class="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8 screen-only">
+<main class="max-w-screen-2xl mx-auto p-4 sm:p-5 lg:p-6 screen-only">
   <div class="mb-8 border-b border-slate-700 pb-6">
     <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-2">Illegal Attack Compensation Calculator</h1>
     <p class="text-slate-400 text-lg">Enter losses in the input boxes. The calculator adds base silver, applies a 20% caravan tax, and calculates the totals due.</p>
   </div>
 
   <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-5 mb-6 shadow-lg shadow-black/20">
-    <h2 class="text-xl font-bold text-yellow-400 mb-4 flex items-center gap-2">Troops
+    <h2 class="text-xl font-bold text-yellow-400 mb-4 flex items-center gap-2">
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path></svg>
+      Troops
     </h2>
+
     <div class="overflow-x-auto rounded-xl border border-slate-700">
       <table class="w-full text-sm text-center whitespace-nowrap">
         <thead class="text-xs uppercase bg-slate-900 text-slate-400">
           <tr>
-            <th class="px-4 py-3 text-left border-r border-slate-700">Troop Type</th>
-            <th class="px-3 py-3 border-r border-slate-700">L1</th>
-            <th class="px-3 py-3 border-r border-slate-700">L2</th>
-            <th class="px-3 py-3 border-r border-slate-700">L3</th>
-            <th class="px-3 py-3 border-r border-slate-700">L4</th>
-            <th class="px-3 py-3 border-r border-slate-700">L5</th>
-            <th class="px-3 py-3 border-r border-slate-700">L6</th>
-            <th class="px-3 py-3 border-r border-slate-700">L7</th>
-            <th class="px-3 py-3 border-r border-slate-700">L8</th>
-            <th class="px-3 py-3 border-r border-slate-700">L9</th>
-            <th class="px-4 py-3 border-r border-slate-700 text-yellow-100 bg-slate-800">Base Silver</th>
-            <th class="px-4 py-3 border-r border-slate-700 text-yellow-100 bg-slate-800">20% Tax</th>
-            <th class="px-4 py-3 text-green-400 bg-slate-800 font-bold">Total Due</th>
+            <th class="px-3 py-3 text-left border-r border-slate-700">Troop Type</th>
+            <th class="px-2 py-3 border-r border-slate-700">L1</th>
+            <th class="px-2 py-3 border-r border-slate-700">L2</th>
+            <th class="px-2 py-3 border-r border-slate-700">L3</th>
+            <th class="px-2 py-3 border-r border-slate-700">L4</th>
+            <th class="px-2 py-3 border-r border-slate-700">L5</th>
+            <th class="px-2 py-3 border-r border-slate-700">L6</th>
+            <th class="px-2 py-3 border-r border-slate-700">L7-L9</th>
+            <th class="px-3 py-3 border-r border-slate-700 text-yellow-100 bg-slate-800">Base Silver</th>
+            <th class="px-3 py-3 border-r border-slate-700 text-yellow-100 bg-slate-800">20% Tax</th>
+            <th class="px-3 py-3 text-green-400 bg-slate-800 font-bold">Total Due</th>
           </tr>
         </thead>
         <tbody id="troops" class="divide-y divide-slate-700/50"></tbody>
@@ -59,23 +73,22 @@
       <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" clip-rule="evenodd"></path></svg>
       Catapults
     </h2>
+
     <div class="overflow-x-auto rounded-xl border border-slate-700">
       <table class="w-full text-sm text-center whitespace-nowrap">
         <thead class="text-xs uppercase bg-slate-900 text-slate-400">
           <tr>
-            <th class="px-4 py-3 text-left border-r border-slate-700">Unit Type</th>
-            <th class="px-3 py-3 border-r border-slate-700">L1</th>
-            <th class="px-3 py-3 border-r border-slate-700">L2</th>
-            <th class="px-3 py-3 border-r border-slate-700">L3</th>
-            <th class="px-3 py-3 border-r border-slate-700">L4</th>
-            <th class="px-3 py-3 border-r border-slate-700">L5</th>
-            <th class="px-3 py-3 border-r border-slate-700">L6</th>
-            <th class="px-3 py-3 border-r border-slate-700">L7</th>
-            <th class="px-3 py-3 border-r border-slate-700">L8</th>
-            <th class="px-3 py-3 border-r border-slate-700">L9</th>
-            <th class="px-4 py-3 border-r border-slate-700 text-yellow-100 bg-slate-800">Base Silver</th>
-            <th class="px-4 py-3 border-r border-slate-700 text-yellow-100 bg-slate-800">20% Tax</th>
-            <th class="px-4 py-3 text-green-400 bg-slate-800 font-bold">Total Due</th>
+            <th class="px-3 py-3 text-left border-r border-slate-700">Unit Type</th>
+            <th class="px-2 py-3 border-r border-slate-700">L1</th>
+            <th class="px-2 py-3 border-r border-slate-700">L2</th>
+            <th class="px-2 py-3 border-r border-slate-700">L3</th>
+            <th class="px-2 py-3 border-r border-slate-700">L4</th>
+            <th class="px-2 py-3 border-r border-slate-700">L5</th>
+            <th class="px-2 py-3 border-r border-slate-700">L6</th>
+            <th class="px-2 py-3 border-r border-slate-700">L7-L9</th>
+            <th class="px-3 py-3 border-r border-slate-700 text-yellow-100 bg-slate-800">Base Silver</th>
+            <th class="px-3 py-3 border-r border-slate-700 text-yellow-100 bg-slate-800">20% Tax</th>
+            <th class="px-3 py-3 text-green-400 bg-slate-800 font-bold">Total Due</th>
           </tr>
         </thead>
         <tbody id="catapults" class="divide-y divide-slate-700/50"></tbody>
@@ -86,6 +99,7 @@
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
     <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-5 shadow-lg shadow-black/20">
       <h2 class="text-xl font-bold text-yellow-400 mb-4">Other Losses / Violations</h2>
+
       <div class="overflow-x-auto rounded-xl border border-slate-700">
         <table class="w-full text-sm text-center whitespace-nowrap">
           <thead class="text-xs uppercase bg-slate-900 text-slate-400">
@@ -104,6 +118,7 @@
 
     <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-5 shadow-lg shadow-black/20">
       <h2 class="text-xl font-bold text-emerald-400 mb-4">Resources (Not Compensated in Silver)</h2>
+
       <div class="overflow-x-auto rounded-xl border border-slate-700">
         <table class="w-full text-sm text-center whitespace-nowrap">
           <thead class="text-xs uppercase bg-slate-900 text-slate-400">
@@ -117,42 +132,49 @@
           <tbody id="rss" class="divide-y divide-slate-700/50"></tbody>
         </table>
       </div>
+
       <p class="text-xs text-slate-400 mt-4 italic">* Resources are calculated and collected separately from the standard Silver totals.</p>
     </div>
   </div>
 
-  <div class="bg-slate-900 border-2 border-slate-700 rounded-xl p-6 lg:p-8 shadow-2xl mb-12">
-    <div class="flex flex-col lg:flex-row gap-10">
+  <div class="bg-slate-900 border-2 border-slate-700 rounded-xl p-5 lg:p-6 shadow-2xl mb-12">
+    <div class="flex flex-col lg:flex-row gap-8">
       <div class="flex-1">
-        <h2 class="text-lg font-bold text-yellow-400 mb-6 border-b border-slate-700 pb-2">Silver Claim Totals</h2>
-        <div class="space-y-3 text-sm">
+        <h2 class="text-lg font-bold text-yellow-400 mb-4 border-b border-slate-700 pb-2">Silver Claim Totals</h2>
+
+        <div class="space-y-3 text-base">
           <div class="flex justify-between items-center bg-slate-800/80 rounded-xl p-3 border border-slate-700">
             <span class="text-slate-300 font-medium">Base Silver Compensation</span>
-            <strong id="baseTotal" class="text-white text-base">0</strong>
+            <strong id="baseTotal" class="text-white">0</strong>
           </div>
+
           <div class="flex justify-between items-center bg-slate-800/80 rounded-xl p-3 border border-slate-700">
             <span class="text-slate-300 font-medium">20% Caravan Tax</span>
-            <strong id="taxTotal" class="text-white text-base">0</strong>
+            <strong id="taxTotal" class="text-white">0</strong>
           </div>
+
           <div class="flex justify-between items-center bg-yellow-500/10 rounded-xl p-3 border-2 border-yellow-500/50 mt-3">
-            <span class="text-yellow-400 font-bold text-sm uppercase tracking-wide leading-none">Total Silver Due</span>
+            <span class="text-yellow-400 font-bold text-sm uppercase tracking-wider">Total Silver Due</span>
             <strong id="grandTotal" class="text-yellow-400 text-lg font-black">0</strong>
           </div>
         </div>
       </div>
 
       <div class="flex-1">
-        <h2 class="text-lg font-bold text-emerald-400 mb-6 border-b border-slate-700 pb-2">Resource Claim Totals</h2>
-        <div class="space-y-4 text-lg">
-          <div class="flex justify-between items-center bg-slate-800/80 rounded-xl p-4 border border-slate-700">
+        <h2 class="text-lg font-bold text-emerald-400 mb-4 border-b border-slate-700 pb-2">Resource Claim Totals</h2>
+
+        <div class="space-y-3 text-base">
+          <div class="flex justify-between items-center bg-slate-800/80 rounded-xl p-3 border border-slate-700">
             <span class="text-slate-300 font-medium">Total Wood Due</span>
             <strong id="woodTotal" class="text-emerald-400 font-bold">0</strong>
           </div>
-          <div class="flex justify-between items-center bg-slate-800/80 rounded-lg p-4 border border-slate-700">
+
+          <div class="flex justify-between items-center bg-slate-800/80 rounded-xl p-3 border border-slate-700">
             <span class="text-slate-300 font-medium">Total Stone Due</span>
             <strong id="stoneTotal" class="text-emerald-400 font-bold">0</strong>
           </div>
-          <div class="flex justify-between items-center bg-slate-800/80 rounded-lg p-4 border border-slate-700">
+
+          <div class="flex justify-between items-center bg-slate-800/80 rounded-xl p-3 border border-slate-700">
             <span class="text-slate-300 font-medium">Total Iron Due</span>
             <strong id="ironTotal" class="text-emerald-400 font-bold">0</strong>
           </div>
@@ -160,8 +182,9 @@
       </div>
     </div>
 
-    <div class="mt-10 flex flex-wrap gap-4 border-t border-slate-700 pt-8">
+    <div class="mt-8 flex flex-wrap gap-4 border-t border-slate-700 pt-6">
       <button onclick="clearInputs()" class="flex-1 sm:flex-none px-6 py-4 rounded-xl bg-slate-700 hover:bg-red-500/80 text-white font-bold transition-colors duration-200">Clear Calculator</button>
+
       <button onclick="executePrint()" class="flex-1 sm:flex-none px-6 py-4 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-slate-900 font-black shadow-lg shadow-yellow-500/20 transition-all duration-200 flex items-center justify-center gap-2">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
         Print / Save Custom PDF
@@ -174,15 +197,60 @@
 
 <script>
   const taxRate = 0.20;
+
   const troopTypes = ["Ranged", "Melee", "Mounted", "Specialists", "Mercenaries", "Battle Griffins", "Monsters"];
-  const troopRates = { 1:300, 2:300, 3:300, 4:600, 5:600, 6:600, 7:900, 8:900, 9:900 };
-  const griffinRates = { 1:2000, 2:4000, 3:6000, 4:8000, 5:10000, 6:12000, 7:14000, 8:16000, 9:18000 };
-  const monsterRates = { 3:10000, 4:10000, 5:10000, 6:30000, 7:30000, 8:30000, 9:30000 };
-  const catapultRates = { 1:1500, 2:1500, 3:1500, 4:3000, 5:3000, 6:3000, 7:4500, 8:4500, 9:4500 };
+
+  const visibleLevels = [1, 2, 3, 4, 5, 6, "7-9"];
+
+  const troopRates = {
+    1: 300,
+    2: 300,
+    3: 300,
+    4: 600,
+    5: 600,
+    6: 600,
+    "7-9": 900
+  };
+
+  const griffinRates = {
+    1: 2000,
+    2: 4000,
+    3: 6000,
+    4: 8000,
+    5: 10000,
+    6: 12000,
+    "7-9": 16000
+  };
+
+  const monsterRates = {
+    3: 10000,
+    4: 10000,
+    5: 10000,
+    6: 30000,
+    "7-9": 30000
+  };
+
+  const catapultRates = {
+    1: 1500,
+    2: 1500,
+    3: 1500,
+    4: 3000,
+    5: 3000,
+    6: 3000,
+    "7-9": 4500
+  };
+
   const otherItems = [
-    ["Hero", 2000], ["Captain", 2000], ["Tar", 500], ["Gold Coin", 1000],
-    ["Illegal Scouting", 500000], ["Portal", 2000000], ["Fort", 5000000], ["Resource Mine", 2000000]
+    ["Hero", 2000],
+    ["Captain", 2000],
+    ["Tar", 500],
+    ["Gold Coin", 1000],
+    ["Illegal Scouting", 500000],
+    ["Portal", 2000000],
+    ["Fort", 5000000],
+    ["Resource Mine", 2000000]
   ];
+
   const rssTypes = ["Wood", "Stone", "Iron"];
 
   function number(value) {
@@ -202,41 +270,47 @@
     return `<span class="inline-block w-16 sm:w-20 p-2 rounded-lg border-2 border-slate-700 bg-slate-900/40 text-slate-600 font-bold">—</span>`;
   }
 
+  function getRate(type, level) {
+    if (type === "Battle Griffins") return griffinRates[level] || 0;
+    if (type === "Monsters") return monsterRates[level] || 0;
+    if (type === "Catapults") return catapultRates[level] || 0;
+    return troopRates[level] || 0;
+  }
+
   function buildTroops() {
     document.getElementById("troops").innerHTML = troopTypes.map(type => {
-      const levelCells = [1,2,3,4,5,6,7,8,9].map(level => {
-        const content = type === "Monsters" && level < 3 ? emptyCell() : inputBox(level);
+      const levelCells = visibleLevels.map(level => {
+        const content = type === "Monsters" && (level === 1 || level === 2)
+          ? emptyCell()
+          : inputBox(level);
+
         return `<td class="px-2 py-3 border-r border-slate-700">${content}</td>`;
       }).join("");
 
       return `
         <tr data-section="troop" data-type="${type}" class="hover:bg-slate-800/50 transition-colors">
-          <td class="px-4 py-3 border-r border-slate-700 text-left font-bold text-slate-300">${type}</td>
+          <td class="px-3 py-3 border-r border-slate-700 text-left font-bold text-slate-300">${type}</td>
           ${levelCells}
-          <td class="px-4 py-3 border-r border-slate-700 bg-slate-800/30 base font-medium" data-value="0">0</td>
-          <td class="px-4 py-3 border-r border-slate-700 bg-slate-800/30 tax font-medium" data-value="0">0</td>
-          <td class="px-4 py-3 total text-green-400 font-bold bg-slate-800/50" data-value="0">0</td>
+          <td class="px-3 py-3 border-r border-slate-700 bg-slate-800/30 base font-medium" data-value="0">0</td>
+          <td class="px-3 py-3 border-r border-slate-700 bg-slate-800/30 tax font-medium" data-value="0">0</td>
+          <td class="px-3 py-3 total text-green-400 font-bold bg-slate-800/50" data-value="0">0</td>
         </tr>
       `;
     }).join("");
   }
 
   function buildCatapults() {
+    const levelCells = visibleLevels.map(level => {
+      return `<td class="px-2 py-3 border-r border-slate-700">${inputBox(level)}</td>`;
+    }).join("");
+
     document.getElementById("catapults").innerHTML = `
       <tr data-section="catapult-row" data-type="Catapults" class="hover:bg-slate-800/50 transition-colors">
-        <td class="px-4 py-3 border-r border-slate-700 text-left font-bold text-slate-300">Catapults</td>
-        <td class="px-2 py-3 border-r border-slate-700">${inputBox(1)}</td>
-        <td class="px-2 py-3 border-r border-slate-700">${inputBox(2)}</td>
-        <td class="px-2 py-3 border-r border-slate-700">${inputBox(3)}</td>
-        <td class="px-2 py-3 border-r border-slate-700">${inputBox(4)}</td>
-        <td class="px-2 py-3 border-r border-slate-700">${inputBox(5)}</td>
-        <td class="px-2 py-3 border-r border-slate-700">${inputBox(6)}</td>
-        <td class="px-2 py-3 border-r border-slate-700">${inputBox(7)}</td>
-        <td class="px-2 py-3 border-r border-slate-700">${inputBox(8)}</td>
-        <td class="px-2 py-3 border-r border-slate-700">${inputBox(9)}</td>
-        <td class="px-4 py-3 border-r border-slate-700 bg-slate-800/30 base font-medium" data-value="0">0</td>
-        <td class="px-4 py-3 border-r border-slate-700 bg-slate-800/30 tax font-medium" data-value="0">0</td>
-        <td class="px-4 py-3 total text-green-400 font-bold bg-slate-800/50" data-value="0">0</td>
+        <td class="px-3 py-3 border-r border-slate-700 text-left font-bold text-slate-300">Catapults</td>
+        ${levelCells}
+        <td class="px-3 py-3 border-r border-slate-700 bg-slate-800/30 base font-medium" data-value="0">0</td>
+        <td class="px-3 py-3 border-r border-slate-700 bg-slate-800/30 tax font-medium" data-value="0">0</td>
+        <td class="px-3 py-3 total text-green-400 font-bold bg-slate-800/50" data-value="0">0</td>
       </tr>
     `;
   }
@@ -267,9 +341,11 @@
   function updateRowUI(row, base) {
     const tax = base * taxRate;
     const total = base + tax;
+
     row.querySelector(".base").dataset.value = base;
     row.querySelector(".tax").dataset.value = tax;
     row.querySelector(".total").dataset.value = total;
+
     row.querySelector(".base").textContent = format(base);
     row.querySelector(".tax").textContent = format(tax);
     row.querySelector(".total").textContent = format(total);
@@ -281,12 +357,9 @@
       const type = row.dataset.type;
 
       row.querySelectorAll(".level-input").forEach(input => {
-        const level = parseInt(input.dataset.level, 10);
+        const level = input.dataset.level;
         const qty = number(input.value);
-        let rate = troopRates[level] || 0;
-
-        if (type === "Battle Griffins") rate = griffinRates[level] || 0;
-        if (type === "Monsters") rate = monsterRates[level] || 0;
+        const rate = getRate(type, level);
 
         base += qty * rate;
       });
@@ -295,18 +368,25 @@
     });
 
     const catRow = document.querySelector('[data-section="catapult-row"]');
+
     if (catRow) {
       let base = 0;
+
       catRow.querySelectorAll(".level-input").forEach(input => {
-        const level = parseInt(input.dataset.level, 10);
-        base += number(input.value) * (catapultRates[level] || 0);
+        const level = input.dataset.level;
+        const qty = number(input.value);
+        const rate = getRate("Catapults", level);
+
+        base += qty * rate;
       });
+
       updateRowUI(catRow, base);
     }
 
     document.querySelectorAll('[data-section="other"]').forEach(row => {
       const qty = number(row.querySelector("input").value);
       const rate = number(row.dataset.rate);
+
       updateRowUI(row, qty * rate);
     });
 
@@ -314,12 +394,15 @@
       const qty = number(row.querySelector("input").value);
       const tax = qty * taxRate;
       const total = qty + tax;
+
       row.querySelector(".tax").dataset.value = tax;
       row.querySelector(".total").dataset.value = total;
+
       row.querySelector(".tax").textContent = format(tax);
       row.querySelector(".total").textContent = format(total);
 
       const type = row.dataset.type;
+
       if (type === "Wood") document.getElementById("woodTotal").textContent = format(total);
       if (type === "Stone") document.getElementById("stoneTotal").textContent = format(total);
       if (type === "Iron") document.getElementById("ironTotal").textContent = format(total);
@@ -329,9 +412,17 @@
     let taxTotal = 0;
     let grandTotal = 0;
 
-    document.querySelectorAll('tr:not([data-section="rss"]) td.base').forEach(cell => { baseTotal += number(cell.dataset.value); });
-    document.querySelectorAll('tr:not([data-section="rss"]) td.tax').forEach(cell => { taxTotal += number(cell.dataset.value); });
-    document.querySelectorAll('tr:not([data-section="rss"]) td.total').forEach(cell => { grandTotal += number(cell.dataset.value); });
+    document.querySelectorAll('tr:not([data-section="rss"]) td.base').forEach(cell => {
+      baseTotal += number(cell.dataset.value);
+    });
+
+    document.querySelectorAll('tr:not([data-section="rss"]) td.tax').forEach(cell => {
+      taxTotal += number(cell.dataset.value);
+    });
+
+    document.querySelectorAll('tr:not([data-section="rss"]) td.total').forEach(cell => {
+      grandTotal += number(cell.dataset.value);
+    });
 
     document.getElementById("baseTotal").textContent = format(baseTotal);
     document.getElementById("taxTotal").textContent = format(taxTotal);
@@ -345,6 +436,7 @@
 
   function executePrint() {
     const printView = document.getElementById("print-view");
+
     let html = `
       <div class="border-b-4 border-slate-900 pb-4 mb-8">
         <h1 class="text-4xl font-extrabold uppercase tracking-tight">Compensation Claim Report</h1>
@@ -354,9 +446,13 @@
 
     function buildItemHTML(categoryTitle, typeName, inputsArray, base, tax, total, isRSS = false) {
       let detailsHtml = "";
+
       inputsArray.forEach(item => {
-        if (item.qty > 0) detailsHtml += `<div class="text-gray-800 text-lg mb-1">${item.label}: ${format(item.qty)}</div>`;
+        if (item.qty > 0) {
+          detailsHtml += `<div class="text-gray-800 text-lg mb-1">${item.label}: ${format(item.qty)}</div>`;
+        }
       });
+
       if (!detailsHtml) return "";
 
       const calcHtml = isRSS
@@ -372,44 +468,81 @@
     }
 
     document.querySelectorAll('[data-section="troop"]').forEach(row => {
-      const inputs = Array.from(row.querySelectorAll('.level-input')).map(input => ({
+      const inputs = Array.from(row.querySelectorAll(".level-input")).map(input => ({
         label: `Level ${input.dataset.level}`,
         qty: number(input.value)
       }));
-      html += buildItemHTML("Troop", row.dataset.type, inputs, number(row.querySelector(".base").dataset.value), number(row.querySelector(".tax").dataset.value), number(row.querySelector(".total").dataset.value));
+
+      html += buildItemHTML(
+        "Troop",
+        row.dataset.type,
+        inputs,
+        number(row.querySelector(".base").dataset.value),
+        number(row.querySelector(".tax").dataset.value),
+        number(row.querySelector(".total").dataset.value)
+      );
     });
 
     const catRow = document.querySelector('[data-section="catapult-row"]');
+
     if (catRow) {
-      const inputs = Array.from(catRow.querySelectorAll('.level-input')).map(input => ({
+      const inputs = Array.from(catRow.querySelectorAll(".level-input")).map(input => ({
         label: `Level ${input.dataset.level}`,
         qty: number(input.value)
       }));
-      html += buildItemHTML("Unit", "Catapults", inputs, number(catRow.querySelector(".base").dataset.value), number(catRow.querySelector(".tax").dataset.value), number(catRow.querySelector(".total").dataset.value));
+
+      html += buildItemHTML(
+        "Unit",
+        "Catapults",
+        inputs,
+        number(catRow.querySelector(".base").dataset.value),
+        number(catRow.querySelector(".tax").dataset.value),
+        number(catRow.querySelector(".total").dataset.value)
+      );
     }
 
     document.querySelectorAll('[data-section="other"]').forEach(row => {
-      const qty = number(row.querySelector('.level-input').value);
+      const qty = number(row.querySelector(".level-input").value);
+
       if (qty > 0) {
-        html += buildItemHTML("Other Loss", row.dataset.type, [{ label: "Quantity / Amount", qty }], number(row.querySelector(".base").dataset.value), number(row.querySelector(".tax").dataset.value), number(row.querySelector(".total").dataset.value));
+        html += buildItemHTML(
+          "Other Loss",
+          row.dataset.type,
+          [{ label: "Quantity / Amount", qty }],
+          number(row.querySelector(".base").dataset.value),
+          number(row.querySelector(".tax").dataset.value),
+          number(row.querySelector(".total").dataset.value)
+        );
       }
     });
 
     let hasRss = false;
     let rssHtml = `<div class="mt-12 mb-6 border-b-2 border-slate-300"><h2 class="text-3xl font-extrabold uppercase">Resources (Not Compensated in Silver)</h2></div>`;
+
     document.querySelectorAll('[data-section="rss"]').forEach(row => {
-      const qty = number(row.querySelector('.level-input').value);
+      const qty = number(row.querySelector(".level-input").value);
+
       if (qty > 0) {
         hasRss = true;
-        rssHtml += buildItemHTML("Resource", row.dataset.type, [{ label: "Quantity Lost", qty }], 0, number(row.querySelector(".tax").dataset.value), number(row.querySelector(".total").dataset.value), true);
+
+        rssHtml += buildItemHTML(
+          "Resource",
+          row.dataset.type,
+          [{ label: "Quantity Lost", qty }],
+          0,
+          number(row.querySelector(".tax").dataset.value),
+          number(row.querySelector(".total").dataset.value),
+          true
+        );
       }
     });
+
     if (hasRss) html += rssHtml;
 
     html += `
-      <div class="mt-16 bg-slate-100 p-6 rounded-xl border-2 border-slate-300 break-inside-avoid">
+      <div class="mt-16 bg-slate-100 p-5 rounded-xl border-2 border-slate-300 break-inside-avoid">
         <h2 class="text-lg font-black uppercase mb-4 text-slate-800">Final Claim Summary</h2>
-        <div class="text-sm font-bold mb-6">Total Silver Due: <span class="text-black text-lg">${document.getElementById("grandTotal").textContent}</span></div>
+        <div class="text-base font-bold mb-6">Total Silver Due: <span class="text-black">${document.getElementById("grandTotal").textContent}</span></div>
     `;
 
     if (hasRss) {
@@ -426,6 +559,7 @@
     }
 
     html += `</div>`;
+
     printView.innerHTML = html;
     window.print();
   }
@@ -436,5 +570,6 @@
   buildRSS();
   calculate();
 </script>
+
 </body>
 </html>
