@@ -597,10 +597,12 @@
 
     if (hasRss) html += rssHtml;
 
-    html += `
-      <div class="mt-6 bg-slate-100 p-3 rounded-lg border-2 border-slate-300 break-inside-avoid">
-        <h2 class="text-base font-black uppercase mb-2 text-slate-800">Final Claim Summary</h2>
-        <div class="text-sm font-bold mb-3">Total Silver Due: <span class="text-black">${document.getElementById("grandTotal").textContent}</span></div>
+  html += `
+  <div class="mt-6 bg-slate-100 p-3 rounded-lg border-2 border-slate-300 break-inside-avoid">
+    <h2 class="text-base font-black uppercase mb-2 text-slate-800">Final Claim Summary</h2>
+    <div class="text-sm font-bold mb-1">Base Silver Compensation: <span class="text-black">${document.getElementById("baseTotal").textContent}</span></div>
+    <div class="text-sm font-bold mb-1">20% Caravan Tax: <span class="text-black">${document.getElementById("taxTotal").textContent}</span></div>
+    <div class="text-sm font-black mb-3 border-t border-slate-300 pt-2">Total Silver: <span class="text-black">${document.getElementById("grandTotal").textContent}</span></div>
     `;
 
     if (hasRss) {
