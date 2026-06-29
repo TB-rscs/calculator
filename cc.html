@@ -57,18 +57,18 @@
         Illegal Attack Compensation
       </h1>
       <p class="text-slate-400 text-lg max-w-2xl leading-relaxed">
-        Enter losses below to calculate total compensation. The system automatically applies base rates and calculates the required 20% caravan tax.
+        Enter losses below to calculate total compensation. The system automatically applies base rates and calculates the 20% caravan tax. The base amount is what is due to the player.
       </p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 p-6 bg-slate-900/40 rounded-2xl border border-slate-800/60 shadow-inner">
       <div>
-        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Attacker Name</label>
+        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Attacker</label>
         <input type="text" id="attackerName" class="w-full p-3 rounded-xl bg-slate-950/80 border border-slate-700/50 text-amber-100 font-medium outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-all placeholder:text-slate-600" placeholder="e.g. Elve">
       </div>
 
       <div>
-        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Defender Name</label>
+        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Defender</label>
         <input type="text" id="defenderName" class="w-full p-3 rounded-xl bg-slate-950/80 border border-slate-700/50 text-emerald-100 font-medium outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-all placeholder:text-slate-600" placeholder="e.g. Bendodin">
       </div>
 
@@ -101,7 +101,7 @@
             <th class="px-2 py-4">L7-L9</th>
             <th class="px-4 py-4 text-amber-200/80">Base Silver</th>
             <th class="px-4 py-4 text-amber-200/80">20% Tax</th>
-            <th class="px-4 py-4 text-emerald-400">Total Due</th>
+            <th class="px-4 py-4 text-emerald-400">Total</th>
           </tr>
         </thead>
         <tbody id="troops" class="divide-y divide-slate-800"></tbody>
@@ -135,7 +135,7 @@
             <th class="px-2 py-4">L7-L9</th>
             <th class="px-4 py-4 text-amber-200/80">Base Silver</th>
             <th class="px-4 py-4 text-amber-200/80">20% Tax</th>
-            <th class="px-4 py-4 text-emerald-400">Total Due</th>
+            <th class="px-4 py-4 text-emerald-400">Total</th>
           </tr>
         </thead>
         <tbody id="catapults" class="divide-y divide-slate-800"></tbody>
@@ -155,7 +155,7 @@
               <th class="px-2 py-3">Qty</th>
               <th class="px-3 py-3">Base Silver</th>
               <th class="px-3 py-3">20% Tax</th>
-              <th class="px-3 py-3 text-emerald-400">Total Due</th>
+              <th class="px-3 py-3 text-emerald-400">Total</th>
             </tr>
           </thead>
           <tbody id="other" class="divide-y divide-slate-800"></tbody>
@@ -173,7 +173,7 @@
               <th class="px-4 py-3 text-left">Resource</th>
               <th class="px-3 py-3">Qty</th>
               <th class="px-4 py-3">20% Tax</th>
-              <th class="px-4 py-3 text-emerald-400">Total Due</th>
+              <th class="px-4 py-3 text-emerald-400">Total</th>
             </tr>
           </thead>
           <tbody id="rss" class="divide-y divide-slate-800"></tbody>
@@ -217,7 +217,7 @@
         
         <div class="space-y-4">
           <div class="flex justify-between items-center py-3 border-b border-slate-800">
-            <span class="text-slate-300">Base Compensation</span>
+            <span class="text-slate-300">Base Compensation Owed</span>
             <strong id="baseTotal" class="text-slate-100 text-lg">0</strong>
           </div>
 
@@ -584,7 +584,7 @@
     });
 
     let hasRss = false;
-    let rssHtml = `<div class="mt-6 mb-3 border-b-2 border-slate-300"><h2 class="text-xl font-extrabold uppercase">Resources (Not Compensated in Silver)</h2></div>`;
+    let rssHtml = `<div class="mt-6 mb-3 border-b-2 border-slate-300"><h2 class="text-xl font-extrabold uppercase">Resources Due (In Kind)</h2></div>`;
 
     document.querySelectorAll('[data-section="rss"]').forEach(row => {
       const qty = number(row.querySelector(".level-input").value);
@@ -611,20 +611,8 @@
         <h2 class="text-base font-black uppercase mb-2 text-slate-800">Final Claim Summary</h2>
         <div class="text-sm font-bold mb-1">Base Silver Compensation: <span class="text-black">${document.getElementById("baseTotal").textContent}</span></div>
         <div class="text-sm font-bold mb-1">20% Caravan Tax: <span class="text-black">${document.getElementById("taxTotal").textContent}</span></div>
-        <div class="text-sm font-black mb-3 border-t border-slate-300 pt-2">Total Silver Due: <span class="text-black">${document.getElementById("grandTotal").textContent}</span></div>
+        <div class="text-sm font-black mb-3 border-t border-slate-300 pt-2">Total: <span class="text-black">${document.getElementById("grandTotal").textContent}</span></div>
     `;
-
-    if (hasRss) {
-      html += `
-        <div class="border-t-2 border-slate-300 pt-3">
-          <h3 class="text-base font-bold mb-2 text-slate-700">Total Resources Due:</h3>
-          <ul class="text-sm space-y-1 ml-4">
-            <li><strong>Wood:</strong> ${document.getElementById("woodTotal").textContent}</li>
-            <li><strong>Stone:</strong> ${document.getElementById("stoneTotal").textContent}</li>
-            <li><strong>Iron:</strong> ${document.getElementById("ironTotal").textContent}</li>
-          </ul>
-        </div>
-      `;
     }
 
     html += `</div>`;
